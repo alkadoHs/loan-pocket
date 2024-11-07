@@ -5,8 +5,14 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import RegisterStepper from './register-stepper';
 
-export default function Register() {
+export interface Region {
+    id: number;
+    name: string;
+}
+
+export default function Register({ regions }: { regions: Region[]}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -26,7 +32,9 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
-            <form onSubmit={submit}>
+            <RegisterStepper regions={regions} />
+
+            {/* <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -115,7 +123,7 @@ export default function Register() {
                         Register
                     </PrimaryButton>
                 </div>
-            </form>
+            </form> */}
         </GuestLayout>
     );
 }
