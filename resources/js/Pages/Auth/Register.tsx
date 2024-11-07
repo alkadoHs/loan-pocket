@@ -32,9 +32,9 @@ export default function Register({ regions }: { regions: Region[]}) {
         <GuestLayout>
             <Head title="Register" />
 
-            <RegisterStepper regions={regions} />
+            {/* <RegisterStepper regions={regions} /> */}
 
-            {/* <form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -123,7 +123,7 @@ export default function Register({ regions }: { regions: Region[]}) {
                         Register
                     </PrimaryButton>
                 </div>
-            </form> */}
+            </form>
         </GuestLayout>
     );
 }
