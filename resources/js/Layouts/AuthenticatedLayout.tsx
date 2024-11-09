@@ -45,6 +45,7 @@ export default function Authenticated({ children }: { children: ReactNode }) {
             router.cancel();
         };
     }, []);
+    
     return (
         <SidebarProvider>
             <AppSidebar />

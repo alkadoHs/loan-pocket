@@ -3,32 +3,8 @@ import { Link, router } from '@inertiajs/react';
 import { PropsWithChildren, useEffect } from 'react';
 
 import "preline/preline";
-import { IStaticMethods } from "preline/preline";
-declare global {
-    interface Window {
-        HSStaticMethods: IStaticMethods;
-    }
-}
 
 export default function Guest({ children }: PropsWithChildren) {
-    useEffect(() => {
-        // Initialize on first load
-        window.HSStaticMethods.autoInit();
-
-        // Set up a listener for Inertia navigations
-        const handleNavigation = () => {
-            window.HSStaticMethods.autoInit();
-        };
-
-        router.on("start", (event) => {
-            handleNavigation;
-        });
-
-        // Clean up the listener on component unmount
-        return () => {
-            router.cancel();
-        };
-    }, []);
     
     return (
         <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0 dark:bg-zinc-900">

@@ -11,35 +11,47 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 100);
+            $table->text('address')->nullable();
+            $table->string('phone', 15)->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('branches', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('company_id')->constrained()->cascadeOnDelete();
+            $table->string('name', 100);
+            $table->text('address')->nullable();
+            $table->string('phone', 15)->nullable();
+            $table->string('region')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
                 $table->id();
-                $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
                 $table->string('employee_id', 20)->unique();
-                $table->string('first_name', 50);
-                $table->string('last_name', 50);
-                $table->date(column: 'date_of_birth')->nullable();
-                $table->enum('gender', ['M', 'F', 'Other']);
-                $table->enum('marital_status', ['Single', 'Married', 'Divorced', 'Widowed']);
-                $table->string('national_id', 30)->unique();
-                $table->string('contact_number', 15);
+                $table->string('name')->unique();
+                $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('cascade');
+                $table->foreignId('company_id')->nullable()->constrained()->cascadeOnDelete();
+                $table->string('phone', 15)->nullable();
                 $table->string('email', 100)->unique();
-                $table->text('address')->nullable();
+                $table->string('national_id', length: 30)->unique()->nullable();
                 $table->string('job_title', 50)->nullable();
-                $table->string('department', 50)->nullable();
-                $table->enum('employee_type', ['Full-time', 'Part-time', 'Contract']);
-                $table->date('date_of_hire');
+                $table->text('address')->nullable();
+                $table->enum('gender', ['M', 'F', 'Other']);
+                $table->date('date_of_hire')->nullable();
                 $table->date('date_of_termination')->nullable();
-                $table->decimal('salary', 10, 2);
+                $table->decimal('salary', 10, 2)->default(0);
                 $table->string('bank_account', 30)->nullable();
-                $table->string('tin', 20)->nullable();
-                $table->string('username', 50)->unique();
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');
-                $table->enum('access_level', ['Admin', 'Manager', 'Staff']);
+                $table->enum('access_level', ['Admin', 'Manager', 'General Manager', 'Staff'])->default('Admin');
                 $table->timestamp('last_login')->nullable();
-                $table->enum('status', ['Active', 'On Leave', 'Terminated']);
-                $table->rememberToken();
+                $table->enum('status', ['Active', 'On Leave', 'Terminated', 'Blocked'])->default('Active');
                 $table->binary('photo')->nullable();
+                $table->rememberToken();
                 $table->timestamps();
         });
 
@@ -65,6 +77,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('branches');
+        Schema::dropIfExists('companies');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

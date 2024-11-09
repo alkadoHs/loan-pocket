@@ -3,10 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Observers\UserObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+#[ObservedBy(UserObserver::class)]
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -19,7 +23,23 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'employee_id',
+        'branch_id',
+        'company_id',
+        'phone',
         'email',
+        'national_id',
+        'job_title',
+        'address',
+        'gender',
+        'date_of_hire',
+        'date_of_termination',
+        'salary',
+        'bank_acount',
+        'access_level',
+        'last_login',
+        'status',
+        'photo',
         'password',
     ];
 
@@ -44,5 +64,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }
