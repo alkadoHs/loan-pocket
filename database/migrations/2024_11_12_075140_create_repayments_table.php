@@ -42,7 +42,7 @@ return new class extends Migration
                 CASE
                     WHEN payment_date IS NOT NULL THEN
                         CASE
-                            WHEN duration = 'daily' THEN DATE_ADD(payment_date, INTERVAL (repayments - 1) DAY)
+                        WHEN duration = 'daily' THEN DATE_ADD(payment_date, INTERVAL (repayments - 1) DAY)
                             WHEN duration = 'weekly' THEN DATE_ADD(payment_date, INTERVAL (repayments - 1) * 7 DAY)
                             WHEN duration = 'monthly' THEN DATE_ADD(payment_date, INTERVAL (repayments - 1) * 30 DAY)
                             ELSE NULL

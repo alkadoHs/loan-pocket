@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\LoanObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[ObservedBy(LoanObserver::class)]
 class Loan extends Model
 {
     protected $fillable = [
@@ -69,5 +72,10 @@ class Loan extends Model
     public function govermentDetails(): HasMany
     {
         return $this->hasMany(GovermentDetail::class);
+    }
+
+    public function repayments(): HasMany
+    {
+        return $this->hasMany(Repayment::class);
     }
 }

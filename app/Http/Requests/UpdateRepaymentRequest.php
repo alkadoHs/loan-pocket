@@ -11,7 +11,7 @@ class UpdateRepaymentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class UpdateRepaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'loan_id' => 'required|exists:loans,id',
+            'payment_method_id' => 'required|exists:payment_methods,id',
+            'description' => 'nullable|string',
+            'amount' => 'required|numeric|min:0',
+            'payment_date' => 'required|date',
+            'payer_name' => 'nullable|string',
+            'withdral_amount' => 'nullable|numeric|min:0',
+            'status' => 'nullable|string',
+            'duration' => 'nullable|string|in:daily,weekly,monthly,yearly',
+            'repayments' => 'nullable|numeric|min:1',
         ];
     }
 }
