@@ -30,13 +30,13 @@ import { usePage } from "@inertiajs/react";
 const data = {
     navMain: [
         {
-            title: "Playground",
+            title: "Dashboards",
             url: "#",
             icon: SquareTerminal,
             isActive: true,
             items: [
                 {
-                    title: "Dasboard",
+                    title: "Main",
                     url: route("dashboard"),
                 },
                 {

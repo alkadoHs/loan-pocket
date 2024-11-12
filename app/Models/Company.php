@@ -13,4 +13,34 @@ class Company extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function loanProducts(): HasMany
+    {
+        return $this->hasMany(LoanProduct::class);
+    }
+
+    public function loanFees(): HasMany
+    {
+        return $this->hasMany(LoanFee::class);
+    }
+
+    public function shareholders(): HasMany
+    {
+        return $this->hasMany(Shareholder::class);
+    }
+
+    public function flotis(): HasMany
+    {
+        return $this->hasMany(Floti::class);
+    }
+
+    public function capitals(): HasMany
+    {
+        return $this->hasMany(Capital::class);
+    }
+    
+    public function formulas(): HasMany
+    {
+        return $this->hasMany(Formula::class);
+    }
 }

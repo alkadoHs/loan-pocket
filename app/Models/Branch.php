@@ -20,4 +20,24 @@ class Branch extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function paymentMethods(): HasMany
+    {
+        return $this->hasMany(PaymentMethod::class);
+    }
+
+    public function flotis(): HasMany
+    {
+        return $this->hasMany(Floti::class);
+    }
+
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class);
+    }
 }
