@@ -8,6 +8,7 @@ import {
     Map,
     PieChart,
     Send,
+    Settings,
     Settings2,
     SquareTerminal,
 } from "lucide-react";
@@ -50,20 +51,52 @@ const data = {
             ],
         },
         {
-            title: "Models",
+            title: "Setup",
             url: "#",
-            icon: Bot,
+            icon: Settings,
             items: [
                 {
-                    title: "Genesis",
+                    title: "Share Holders",
+                    url: route('shareholders.index'),
+                },
+                {
+                    title: "Capital",
                     url: "#",
                 },
                 {
-                    title: "Explorer",
+                    title: "Float",
                     url: "#",
                 },
                 {
-                    title: "Quantum",
+                    title: "Loan Product",
+                    url: "#",
+                },
+                {
+                    title: "Loan Fee",
+                    url: "#",
+                },
+                {
+                    title: "Penalt",
+                    url: "#",
+                },
+                {
+                    title: "Interest Formula",
+                    url: "#",
+                },
+                {
+                    title: "Transaction Accounts",
+                    url: "#",
+                },
+                {
+                    title: "Branch",
+                    url: "#",
+                },
+                {
+                    title: "Expenses",
+                    url: "#",
+                },
+                {
+                    title: "Income",
                     url: "#",
                 },
             ],

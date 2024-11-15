@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreShareHolderRequest;
 use App\Http\Requests\UpdateShareHolderRequest;
 use App\Models\ShareHolder;
+use Inertia\Inertia;
 
 class ShareHolderController extends Controller
 {
@@ -13,7 +14,8 @@ class ShareHolderController extends Controller
      */
     public function index()
     {
-        //
+        $shareholders = Shareholder::all();
+        return Inertia::render("shareholders/Index", ["shareholders" => $shareholders]);
     }
 
     /**
@@ -29,7 +31,11 @@ class ShareHolderController extends Controller
      */
     public function store(StoreShareHolderRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        ShareHolder::create($validated);
+
+        return redirect()->route("shareholders.index");
     }
 
     /**
