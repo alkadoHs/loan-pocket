@@ -34,7 +34,7 @@ const ShareHolders = ({ shareholders }: { shareholders: Shareholder[] }) => {
                     </div>
                 </div>
 
-                <div className="overflow-x-auto bg-muted">
+                <div className="overflow-x-auto bg-muted whitespace-nowrap">
                     <Table>
                         <TableHeader>
                             <TableRow>

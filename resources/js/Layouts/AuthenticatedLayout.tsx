@@ -47,50 +47,52 @@ export default function Authenticated({ children }: { children: ReactNode }) {
     }, []);
     
     return (
-        <SidebarProvider>
+        <SidebarProvider className="max-w-full">
             <AppSidebar />
-            <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2">
-                    <div className="flex items-center justify-end gap-2 px-4 w-full">
-                        <SidebarTrigger className="-ml-1 mr-auto" />
-
-                        <Separator
-                            orientation="vertical"
-                            className="mr-2 h-4"
-                        />
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="#">
-                                        Loan pocket co
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator className="hidden md:block" />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>
-                                        Data Fetching
-                                    </BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
-
-                        <ModeToggle />
-                        <Button variant="outline" size="icon">
-                            <Bell className="h-[1.2rem] w-[1.2rem] " />
-                        </Button>
-                        <Button variant="outline" size="icon">
-                            <Mail className="h-[1.2rem] w-[1.2rem] " />
-                        </Button>
-                        <Button
-                            onClick={() => router.post(route("logout"))}
-                            variant="outline"
-                            size="icon"
-                        >
-                            <LogOut className="h-[1.2rem] w-[1.2rem] " />
-                        </Button>
-                    </div>
-                </header>
-                {children}
+            <SidebarInset className="max-w-full">
+                <div className="max-w-full">
+                    <header className="flex h-16 shrink-0 items-center gap-2">
+                        <div className="flex items-center justify-end gap-2 px-4 w-full">
+                            <SidebarTrigger className="-ml-1 mr-auto" />
+                            <Separator
+                                orientation="vertical"
+                                className="mr-2 h-4"
+                            />
+                            <Breadcrumb>
+                                <BreadcrumbList>
+                                    <BreadcrumbItem className="hidden md:block">
+                                        <BreadcrumbLink href="#">
+                                            Loan pocket co
+                                        </BreadcrumbLink>
+                                    </BreadcrumbItem>
+                                    <BreadcrumbSeparator className="hidden md:block" />
+                                    <BreadcrumbItem>
+                                        <BreadcrumbPage>
+                                            Data Fetching
+                                        </BreadcrumbPage>
+                                    </BreadcrumbItem>
+                                </BreadcrumbList>
+                            </Breadcrumb>
+                            <ModeToggle />
+                            <Button variant="outline" size="icon">
+                                <Bell className="h-[1.2rem] w-[1.2rem] " />
+                            </Button>
+                            <Button variant="outline" size="icon">
+                                <Mail className="h-[1.2rem] w-[1.2rem] " />
+                            </Button>
+                            <Button
+                                onClick={() => router.post(route("logout"))}
+                                variant="outline"
+                                size="icon"
+                            >
+                                <LogOut className="h-[1.2rem] w-[1.2rem] " />
+                            </Button>
+                        </div>
+                    </header>
+                    <main className="max-w-full">
+                        {children}
+                    </main>
+                </div>
             </SidebarInset>
         </SidebarProvider>
     );
