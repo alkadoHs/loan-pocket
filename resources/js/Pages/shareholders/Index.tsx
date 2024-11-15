@@ -8,8 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-import React from "react";
+import { Head } from "@inertiajs/react";
 import { CreateShareholder } from "./actions/create-shareholder";
 
 interface Shareholder {

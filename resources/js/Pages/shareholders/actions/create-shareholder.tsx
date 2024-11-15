@@ -1,17 +1,15 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
+import InputError from "@/breeze-components/InputError";
+import InputLabel from "@/breeze-components/InputLabel";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
     Select,
     SelectContent,
@@ -27,7 +25,7 @@ import { toast } from "sonner";
 
 export function CreateShareholder() {
     const [open, setOpen] = useState(false);
-    const { data, setData, post, reset, progress, errors } = useForm({
+    const { data, setData, post, reset, processing, errors } = useForm({
         name: "",
         phone: "",
         email: "",
@@ -44,7 +42,6 @@ export function CreateShareholder() {
                 toast.success("Shareholder created successfully");
             },
         });
-
     };
 
     return (
@@ -119,7 +116,12 @@ export function CreateShareholder() {
                         <div>
                             <InputLabel htmlFor="gender" value="Gender" />
 
-                            <Select onValueChange={(value) => setData("gender", value)} value={data.gender}>
+                            <Select
+                                onValueChange={(value) =>
+                                    setData("gender", value)
+                                }
+                                value={data.gender}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder="Select gender" />
                                 </SelectTrigger>
@@ -135,12 +137,17 @@ export function CreateShareholder() {
                                 </SelectContent>
                             </Select>
 
-                            <InputError className="mt-2" message={errors.gender} />
+                            <InputError
+                                className="mt-2"
+                                message={errors.gender}
+                            />
                         </div>
                     </div>
 
                     <DialogFooter>
-                        <Button type="submit">Save changes</Button>
+                        <Button type="submit" disabled={processing}>
+                            Save changes
+                        </Button>
                     </DialogFooter>
                 </form>
             </DialogContent>

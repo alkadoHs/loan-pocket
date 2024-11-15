@@ -1,6 +1,6 @@
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
+import InputError from "@/breeze-components/InputError";
+import InputLabel from "@/breeze-components/InputLabel";
+import PrimaryButton from "@/breeze-components/PrimaryButton";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";

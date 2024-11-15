@@ -1,2 +1,1 @@
-import InputError from "@/Components/InputError";
-
+import InputError from "@/breeze-components/InputError";
