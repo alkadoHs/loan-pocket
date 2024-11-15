@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CapitalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShareHolderController;
 use Illuminate\Foundation\Application;
@@ -19,9 +20,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('shareholders', ShareHolderController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('shareholders', ShareHolderController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('capitals', CapitalController::class)
+        ->only(['index', 'store', 'update', 'destroy']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

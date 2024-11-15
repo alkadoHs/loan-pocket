@@ -11,15 +11,15 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { Shareholder } from "../Index";
 import { useState } from "react";
 import { router } from "@inertiajs/react";
 import { toast } from "sonner";
+import { Capital } from "../Index";
 
-export function DeleteShareholder({
-    shareholder,
+export function DeleteCapital({
+    capital,
 }: {
-    shareholder: Shareholder;
+    capital: Capital;
 }) {
     const [open, setOpen] = useState(false);
     return (
@@ -32,14 +32,11 @@ export function DeleteShareholder({
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle className="text-center">
-                        Delete {shareholder.name} ?
+                        Delete this capital ?
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-center">
-                        This action will permanently delete{" "}
-                        <span>
-                            {shareholder?.name}. Do you want to proceed?
-                        </span>
-                        .
+                        This action will permanently delete the capital
+                        . Do you want to proceed?
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <div className="flex justify-center gap-3">
@@ -50,12 +47,12 @@ export function DeleteShareholder({
                         variant="destructive"
                         onClick={() => {
                             router.delete(
-                                route("shareholders.destroy", shareholder.id),
+                                route("capitals.destroy", capital.id),
                                 {
                                     onSuccess: () => {
                                         setOpen(false);
                                         toast.success(
-                                            "Shareholder deleted successfully"
+                                            "Capital deleted successfully"
                                         );
                                     },
                                 }

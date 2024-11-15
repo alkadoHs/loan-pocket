@@ -57,16 +57,22 @@ class ShareHolderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateShareHolderRequest $request, ShareHolder $shareHolder)
+    public function update(UpdateShareHolderRequest $request, ShareHolder $shareholder)
     {
-        //
+        $validated = $request->validated();
+
+        $shareholder->update($validated);
+
+        return redirect()->route("shareholders.index");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ShareHolder $shareHolder)
+    public function destroy(ShareHolder $shareholder)
     {
-        //
+        $shareholder->delete();
+
+        return redirect()->route("shareholders.index");
     }
 }

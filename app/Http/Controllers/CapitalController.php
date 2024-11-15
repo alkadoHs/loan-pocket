@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCapitalRequest;
 use App\Http\Requests\UpdateCapitalRequest;
 use App\Models\Capital;
+use Inertia\Inertia;
 
 class CapitalController extends Controller
 {
@@ -13,7 +14,13 @@ class CapitalController extends Controller
      */
     public function index()
     {
-        //
+        $capitals = Capital::with('shareHolder')->get();
+        $shareHolders = \App\Models\ShareHolder::all();
+
+        return Inertia::render('capitals/Index', [
+            'capitals' => $capitals,
+            'shareholders' => $shareHolders,
+        ]);
     }
 
     /**
@@ -29,7 +36,11 @@ class CapitalController extends Controller
      */
     public function store(StoreCapitalRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $capitals = Capital::create($validated);
+
+        return redirect()->route('capitals.index');
     }
 
     /**
@@ -53,7 +64,11 @@ class CapitalController extends Controller
      */
     public function update(UpdateCapitalRequest $request, Capital $capital)
     {
-        //
+        $validated = $request->validated();
+
+        $capital->update($validated);
+
+        return redirect()->route('capitals.index');
     }
 
     /**
@@ -61,6 +76,8 @@ class CapitalController extends Controller
      */
     public function destroy(Capital $capital)
     {
-        //
+        $capital->delete();
+
+        return redirect()->route('capitals.index');
     }
 }

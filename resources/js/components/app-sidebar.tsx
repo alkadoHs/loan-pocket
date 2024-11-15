@@ -61,7 +61,7 @@ const data = {
                 },
                 {
                     title: "Capital",
-                    url: "#",
+                    url: route('capitals.index'),
                 },
                 {
                     title: "Float",

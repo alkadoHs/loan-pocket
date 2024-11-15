@@ -23,8 +23,8 @@ class UpdateShareHolderRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
-            "email" => "required|email|unique:share_holders,email," . $this->shareHolder->id,
-            "phone" => "required|string|unique:share_holders,phone," . $this->shareHolder->id,
+            "email" => "required|email",
+            "phone" => "required|string",
             "gender" => "required|in:male,female",
         ];
     }

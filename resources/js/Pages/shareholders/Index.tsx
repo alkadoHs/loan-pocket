@@ -10,13 +10,16 @@ import {
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { CreateShareholder } from "./actions/create-shareholder";
+import { DeleteShareholder } from "./actions/delete-shareholder";
+import { EditShareholder } from "./actions/edit-shareholder";
+import { Card } from "@/components/ui/card";
 
-interface Shareholder {
+export interface Shareholder {
     id: number;
     name: string;
     phone: string;
     email: string;
-    gender: "male" | "female";
+    gender: string;
 }
 
 const ShareHolders = ({ shareholders }: { shareholders: Shareholder[] }) => {
@@ -25,15 +28,15 @@ const ShareHolders = ({ shareholders }: { shareholders: Shareholder[] }) => {
             <Head title="Shareholders" />
 
             <section className="p-4">
-                <div className="mb-6 flex items-center justify-between">
+                <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <h1 className="text-2xl font-bold">Shareholders</h1>
-
+                    
                     <div className="">
                         <CreateShareholder />
                     </div>
                 </div>
 
-                <div className="overflow-x-auto bg-muted whitespace-nowrap">
+                <Card className="overflow-x-auto whitespace-nowrap">
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -53,11 +56,17 @@ const ShareHolders = ({ shareholders }: { shareholders: Shareholder[] }) => {
                                     <TableCell>{shareholder.phone}</TableCell>
                                     <TableCell>{shareholder.email}</TableCell>
                                     <TableCell>{shareholder.gender}</TableCell>
+                                    <TableCell>
+                                        <div className="flex gap-2">
+                                            <EditShareholder shareholder={shareholder} />
+                                            <DeleteShareholder shareholder={shareholder} />
+                                        </div>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                </div>
+                </Card>
             </section>
         </Authenticated>
     );

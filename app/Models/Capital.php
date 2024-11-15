@@ -13,7 +13,7 @@ class Capital extends Model
 {
     protected $fillable = [
         "company_id",
-        "share_holder_id",,
+        "share_holder_id",
         "type",
         "amount",
         "principal",
@@ -29,7 +29,7 @@ class Capital extends Model
 
     public function shareHolder(): BelongsTo
     {
-        return $this->belongsTo(Shareholder::class);
+        return $this->belongsTo(ShareHolder::class);
     }
 
     public function flotis(): HasMany
