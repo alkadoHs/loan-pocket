@@ -65,15 +65,15 @@ const data = {
                 },
                 {
                     title: "Float",
-                    url: "#",
+                    url: route('flotis.index'),
                 },
                 {
                     title: "Loan Product",
-                    url: "#",
+                    url: route('loan-products.index'),
                 },
                 {
                     title: "Loan Fee",
-                    url: "#",
+                    url: route('loan-fees.index'),
                 },
                 {
                     title: "Penalt",
@@ -81,11 +81,11 @@ const data = {
                 },
                 {
                     title: "Interest Formula",
-                    url: "#",
+                    url: route('formulas.index'),
                 },
                 {
                     title: "Transaction Accounts",
-                    url: "#",
+                    url: route('transactions.index'),
                 },
                 {
                     title: "Branch",

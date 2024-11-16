@@ -53,7 +53,7 @@ export function EditCapital({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button size={"icon"}>
+                <Button size={"icon"} variant={'secondary'}>
                     <Edit className="size-4" />
                 </Button>
             </DialogTrigger>

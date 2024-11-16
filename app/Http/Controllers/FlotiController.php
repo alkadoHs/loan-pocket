@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFlotiRequest;
 use App\Http\Requests\UpdateFlotiRequest;
 use App\Models\Floti;
+use Inertia\Inertia;
 
 class FlotiController extends Controller
 {
@@ -13,7 +14,7 @@ class FlotiController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render("flots/Index");
     }
 
     /**

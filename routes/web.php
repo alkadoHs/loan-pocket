@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\CapitalController;
+use App\Http\Controllers\FlotiController;
+use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\LoanFeeController;
+use App\Http\Controllers\LoanProductController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShareHolderController;
 use Illuminate\Foundation\Application;
@@ -25,6 +30,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->only(['index', 'store', 'update', 'destroy']);
     Route::resource('capitals', CapitalController::class)
         ->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('flotis', FlotiController::class)
+        ->only(['index','store', 'update','destroy']);
+    Route::resource('loan-products', LoanProductController::class)
+        ->only(['index','store', 'update','destroy']);
+    Route::resource('loan-fees', LoanFeeController::class)
+        ->only(['index','store', 'update','destroy']);
+    Route::resource('formulas', FormulaController::class)
+        ->only(['index','store', 'update','destroy']);
+    Route::resource('transactions', PaymentMethodController::class)
+        ->only(['index','store', 'update','destroy']);
+    // Route::resource('branches', Branch)
 });
 
 Route::middleware('auth')->group(function () {

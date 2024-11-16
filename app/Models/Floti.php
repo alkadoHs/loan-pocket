@@ -10,7 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[ObservedBy(FlotiObserver::class)]
 class Floti extends Model
 {
-    protected $fillable = ['company_id', 'capital_id', 'to_branch_id', 'payment_method_id', 'amount', 'withdraw_charges'];
+    protected $fillable = [
+        'company_id', 
+        'capital_id', 
+        'to_branch_id', 
+        'payment_method_id', 
+        'amount', 
+        'withdraw_charges'
+    ];
 
     public function company(): BelongsTo
     {
