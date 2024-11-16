@@ -18,35 +18,41 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Shareholder } from "@/Pages/shareholders/Index";
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { paymentMethod } from "@/Pages/paymentMethods/Index";
+import { Branch } from "@/Pages/Auth/Register";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { numberFormat } from "@/lib/utils";
 
-export function CreateCapital({
-    shareholders,
+export function CreateFloti({
+    paymentMethods,
+    branches,
+    capital,
 }: {
-    shareholders: Shareholder[];
+    paymentMethods: paymentMethod[];
+    branches: Branch[];
+    capital: number;
 }) {
     const [open, setOpen] = useState(false);
     const { data, setData, post, reset, processing, errors } = useForm({
-        share_holder_id: "",
+        to_branch_id: "",
+        payment_method_id: "",
         amount: "",
-        type: "",
-        principal: "0",
-        loan_amount: "0",
-        loan_term: "0",
-        institution_name: "",
     });
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        post(route("capitals.store"), {
+        post(route("flotis.store"), {
             onSuccess: () => {
                 reset();
                 setOpen(false);
-                toast.success("Capital created successfully");
+                toast.success("Float created successfully");
+            },
+            onError: (errors) => {
+                toast.error(errors.error);
             },
         });
     };
@@ -54,38 +60,40 @@ export function CreateCapital({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button>Create capital</Button>
+                <Button>Create float</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-xl">
+                <DialogDescription className="text-center text-green-500">
+                    {" "}
+                    The current capital is{" "}
+                    <b className="text-primary">{numberFormat(capital)}</b>
+                </DialogDescription>
                 <form onSubmit={submit}>
                     <DialogHeader>
-                        <DialogTitle>Create Capital</DialogTitle>
+                        <DialogTitle>Create float</DialogTitle>
                     </DialogHeader>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
                         <div>
-                            <InputLabel
-                                htmlFor="share_holder_id"
-                                value="Shareholder"
-                            />
+                            <InputLabel htmlFor="branch_id" value="To Branch" />
 
                             <Select
                                 onValueChange={(value) =>
-                                    setData("share_holder_id", value)
+                                    setData("to_branch_id", value)
                                 }
-                                value={data.share_holder_id}
+                                value={data.to_branch_id}
                             >
                                 <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select shareholder" />
+                                    <SelectValue placeholder="Select branch" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        {shareholders.map((shareholder) => (
+                                        {branches.map((branch) => (
                                             <SelectItem
-                                                key={shareholder.id}
-                                                value={shareholder.id.toString()}
+                                                key={branch.id}
+                                                value={branch.id.toString()}
                                             >
-                                                {shareholder.name}
+                                                {branch.name}
                                             </SelectItem>
                                         ))}
                                     </SelectGroup>
@@ -94,14 +102,45 @@ export function CreateCapital({
 
                             <InputError
                                 className="mt-2"
-                                message={errors.share_holder_id}
+                                message={errors.to_branch_id}
                             />
                         </div>
                         <div>
                             <InputLabel
-                                htmlFor="amount"
-                                value="Capital Amount"
+                                htmlFor="payment_method_id"
+                                value="Payment method"
                             />
+
+                            <Select
+                                onValueChange={(value) =>
+                                    setData("payment_method_id", value)
+                                }
+                                value={data.payment_method_id}
+                            >
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select payment" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {paymentMethods.map((payment) => (
+                                            <SelectItem
+                                                key={payment.id}
+                                                value={payment.id.toString()}
+                                            >
+                                                {payment.name}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+
+                            <InputError
+                                className="mt-2"
+                                message={errors.payment_method_id}
+                            />
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="amount" value="Amount" />
 
                             <Input
                                 id="amount"

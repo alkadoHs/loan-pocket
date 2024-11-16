@@ -66,6 +66,7 @@ export interface Company {
 }
 
 export interface Branch {
+    id: number;
     name: string;
     region: string;
 }

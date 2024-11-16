@@ -22,11 +22,9 @@ class StoreFlotiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "capital_id" => "required|exists:capitals,id",
             "to_branch_id" => "required|exists:branches,id",
             "payment_method_id" => "required|exists:payment_methods,id",
             "amount" => "required|numeric|max:10000000000",
-            "withdraw_charges" => "required|numeric|max:10000000",
         ];
     }
 }

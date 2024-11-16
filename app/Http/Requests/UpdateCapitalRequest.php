@@ -23,12 +23,7 @@ class UpdateCapitalRequest extends FormRequest
     {
         return [
             "share_holder_id" => "required|exists:share_holders,id",
-            "type" => "required|in:loan,company",
             "amount" => "required|integer|max:1000000000",
-            "principal" => "nullable|integer|max:1000000000",
-            "loan_amount" => "nullable|integer|max:1000000000",
-            "loan_term" => "nullable|integer|max:1000000000",
-            "institution_name" => "nullable|string|max:255",
         ];
     }
 }

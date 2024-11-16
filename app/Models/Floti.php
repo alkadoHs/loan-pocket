@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[ObservedBy(FlotiObserver::class)]
-class Floti extends Model
+class Floti extends Model 
+
 {
     protected $fillable = [
         'company_id', 
-        'capital_id', 
+        'capital_account_id', 
         'to_branch_id', 
         'payment_method_id', 
         'amount', 
-        'withdraw_charges'
     ];
 
     public function company(): BelongsTo
@@ -24,9 +24,14 @@ class Floti extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function capital(): BelongsTo
+    public function capitalAccount(): BelongsTo
     {
-        return $this->belongsTo(Capital::class);
+        return $this->belongsTo(CapitalAccount::class);
+    }
+
+    public function paymentMethod(): BelongsTo
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 
     public function toBranch(): BelongsTo

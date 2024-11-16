@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCapitalRequest;
 use App\Http\Requests\UpdateCapitalRequest;
 use App\Models\Capital;
+use App\Models\CapitalAccount;
 use Inertia\Inertia;
 
 class CapitalController extends Controller
@@ -37,8 +38,11 @@ class CapitalController extends Controller
     public function store(StoreCapitalRequest $request)
     {
         $validated = $request->validated();
+        
+        Capital::create($validated);
 
-        $capitals = Capital::create($validated);
+        $account = CapitalAccount::where('company_id', auth()->user()->company_id)->firstOrCreate();
+        $account->increment('amount', $validated['amount']);
 
         return redirect()->route('capitals.index');
     }

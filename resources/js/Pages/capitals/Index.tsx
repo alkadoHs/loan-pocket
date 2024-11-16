@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react'
 import { CreateShareholder } from '../shareholders/actions/create-shareholder';
 import { Shareholder } from '../shareholders/Index';
 import EmptyPlaceholder from '@/components/empty-placeholder';
-import { numberFormat } from '@/lib/utils';
+import { dateFormat, numberFormat } from '@/lib/utils';
 import { CreateCapital } from './actions/create-capital';
 import { EditCapital } from './actions/edit-capital';
 import { DeleteCapital } from './actions/delete-capital';
@@ -14,12 +14,8 @@ export interface Capital {
     id: number;
     share_holder_id: number;
     share_holder: Shareholder;
-    type: string;
     amount: number;
-    principal: number;
-    loan_amount: number;
-    loan_term: number;
-    institution_name: string;
+    created_at: string;
 }
 const Capitals = ({ capitals, shareholders }: { capitals: Capital[], shareholders: Shareholder[] }) => {
   return (
@@ -41,12 +37,8 @@ const Capitals = ({ capitals, shareholders }: { capitals: Capital[], shareholder
                             <TableRow>
                                 <TableHead>S/N</TableHead>
                                 <TableHead>Shareholder</TableHead>
-                                <TableHead>Type</TableHead>
                                 <TableHead>Amount</TableHead>
-                                <TableHead>Principal</TableHead>
-                                <TableHead>Loan Amount</TableHead>
-                                <TableHead>Loan Term</TableHead>
-                                <TableHead>Institution</TableHead>
+                                <TableHead>Date</TableHead>
                                 <TableHead>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
@@ -55,12 +47,8 @@ const Capitals = ({ capitals, shareholders }: { capitals: Capital[], shareholder
                                 <TableRow key={capital.id}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{capital.share_holder.name}</TableCell>
-                                    <TableCell>{capital.type}</TableCell>
                                     <TableCell>{numberFormat(Number(capital.amount))}</TableCell>
-                                    <TableCell>{numberFormat(Number(capital.principal))}</TableCell>
-                                    <TableCell>{numberFormat(Number(capital.loan_amount))}</TableCell>
-                                    <TableCell>{Number(capital.loan_term)}</TableCell>
-                                    <TableCell>{capital.institution_name}</TableCell>
+                                    <TableCell>{dateFormat(capital.created_at)}</TableCell>
                                     <TableCell>
                                         <div className="flex gap-2">
                                             <EditCapital capital={capital} shareholders={shareholders} />

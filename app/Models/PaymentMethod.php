@@ -26,4 +26,9 @@ class PaymentMethod extends Model
     {
         return $this->hasMany(Repayment::class);
     }
+
+    public  function flotis(): HasMany
+    {
+        return $this->hasMany(Floti::class);
+    }
 }

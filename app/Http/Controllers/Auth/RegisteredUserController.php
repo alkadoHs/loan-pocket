@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\CapitalAccount;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -102,8 +103,10 @@ class RegisteredUserController extends Controller
             $branch = Branch::create(['company_id' => $company->id, ...$branch_data]);
     
             // create an admin
-    
             $user = User::create(['company_id' => $company->id, 'branch_id' => $branch->id, ...$admin_data]);
+
+            //create company account
+            CapitalAccount::create(['company_id' => $company->id, 'amount' => 0]);
     
             event(new Registered($user));
     

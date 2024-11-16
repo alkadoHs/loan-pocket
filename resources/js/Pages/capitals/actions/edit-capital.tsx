@@ -99,38 +99,6 @@ export function EditCapital({
                             />
                         </div>
                         <div>
-                            <InputLabel htmlFor="type" value="Type" />
-
-                            <Select
-                                onValueChange={(value) =>
-                                    setData("type", value)
-                                }
-                                value={data.type}
-                            >
-                                <SelectTrigger className="w-full">
-                                    <SelectValue placeholder="Select type" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectItem
-                                            key={"company"}
-                                            value="company"
-                                        >
-                                            Company
-                                        </SelectItem>
-                                        <SelectItem key={"loan"} value="loan">
-                                            Loan
-                                        </SelectItem>
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-
-                            <InputError
-                                className="mt-2"
-                                message={errors.type}
-                            />
-                        </div>
-                        <div>
                             <InputLabel
                                 htmlFor="amount"
                                 value="Capital Amount"
@@ -151,78 +119,6 @@ export function EditCapital({
                                 message={errors.amount}
                             />
                         </div>
-                        {data.type == "loan" && (
-                            <>
-                                <div>
-                                    <InputLabel
-                                        htmlFor="principal"
-                                        value="Interest"
-                                    />
-
-                                    <Input
-                                        id="principal"
-                                        type="number"
-                                        className="mt-1 block w-full"
-                                        value={data.principal}
-                                        onChange={(e) =>
-                                            setData("principal", e.target.value as any)
-                                        }
-                                    />
-
-                                    <InputError
-                                        className="mt-2"
-                                        message={errors.principal}
-                                    />
-                                </div>
-
-                                <div>
-                                    <InputLabel
-                                        htmlFor="loan_term"
-                                        value="Loan term"
-                                    />
-
-                                    <Input
-                                        id="loan_term"
-                                        type="number"
-                                        className="mt-1 block w-full"
-                                        value={data.loan_term}
-                                        onChange={(e) =>
-                                            setData("loan_term", e.target.value as any)
-                                        }
-                                    />
-
-                                    <InputError
-                                        className="mt-2"
-                                        message={errors.loan_term}
-                                    />
-                                </div>
-
-                                <div>
-                                    <InputLabel
-                                        htmlFor="institution_name"
-                                        value="Institution name"
-                                    />
-
-                                    <Input
-                                        id="institution_name"
-                                        type="string"
-                                        className="mt-1 block w-full"
-                                        value={data.institution_name}
-                                        onChange={(e) =>
-                                            setData(
-                                                "institution_name",
-                                                e.target.value
-                                            )
-                                        }
-                                    />
-
-                                    <InputError
-                                        className="mt-2"
-                                        message={errors.institution_name}
-                                    />
-                                </div>
-                            </>
-                        )}
                     </div>
 
                     <DialogFooter>

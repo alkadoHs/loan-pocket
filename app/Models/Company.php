@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Company extends Model
 {
@@ -42,5 +43,10 @@ class Company extends Model
     public function formulas(): HasMany
     {
         return $this->hasMany(Formula::class);
+    }
+
+    public function capitalAccount(): HasOne
+    {
+        return $this->hasOne(CapitalAccount::class);
     }
 }
