@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaymentMethodRequest;
 use App\Http\Requests\UpdatePaymentMethodRequest;
 use App\Models\PaymentMethod;
+use Inertia\Inertia;
 
 class PaymentMethodController extends Controller
 {
@@ -13,7 +14,10 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        $paymentMethods =  PaymentMethod::all();
+        return Inertia::render('paymentMethods/Index', [
+            'paymentMethods' => $paymentMethods
+        ]);
     }
 
     /**
