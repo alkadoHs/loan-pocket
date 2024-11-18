@@ -3,6 +3,8 @@
 use App\Http\Controllers\CapitalController;
 use App\Http\Controllers\FlotiController;
 use App\Http\Controllers\FormulaController;
+use App\Http\Controllers\LoanFeeByGeneralController;
+use App\Http\Controllers\LoanFeeByLoanProductController;
 use App\Http\Controllers\LoanFeeController;
 use App\Http\Controllers\LoanProductController;
 use App\Http\Controllers\PaymentMethodController;
@@ -33,9 +35,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('flotis', FlotiController::class)
         ->only(['index','store', 'update','destroy']);
     Route::resource('loan-products', LoanProductController::class)
-        ->only(['index','store', 'update','destroy']);
+        ->only(['index','store', 'edit', 'update','destroy']);
     Route::resource('loan-fees', LoanFeeController::class)
         ->only(['index','store', 'update','destroy']);
+    Route::resource('loan-fee-by-loan-product', LoanFeeByLoanProductController::class)
+       ->only(['index','store', 'update','destroy']);
+    Route::resource('loan-fee-by-general', LoanFeeByGeneralController::class)
+       ->only(['index','store', 'update','destroy']);
     Route::resource('formulas', FormulaController::class)
         ->only(['index','store', 'update','destroy']);
     Route::resource('transactions', PaymentMethodController::class)

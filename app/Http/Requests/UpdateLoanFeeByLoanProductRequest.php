@@ -22,7 +22,6 @@ class UpdateLoanFeeByLoanProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "loan_fee_id" => "required|integer|exists:loan_fees,id",
             "loan_product_id" => "required|integer|exists:loan_products,id",
             "description" => "required|string|max:255",
             "amount" => "required|integer|max:1000000000",

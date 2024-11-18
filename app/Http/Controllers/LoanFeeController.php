@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLoanFeeRequest;
 use App\Http\Requests\UpdateLoanFeeRequest;
 use App\Models\LoanFee;
+use App\Models\LoanProduct;
+use Inertia\Inertia;
 
 class LoanFeeController extends Controller
 {
@@ -13,7 +15,10 @@ class LoanFeeController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render("loan-fees/Index", [
+            "loanFee" => LoanFee::with(['loanFeesByGeneral'])->first(),
+            "loanProducts" => LoanProduct::with('loanFeesByLoanProduct')->get(),
+        ]);
     }
 
     /**
@@ -29,7 +34,11 @@ class LoanFeeController extends Controller
      */
     public function store(StoreLoanFeeRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        LoanFee::create($validated);
+
+        return redirect()->route('loan-fees.index');
     }
 
     /**
@@ -53,7 +62,11 @@ class LoanFeeController extends Controller
      */
     public function update(UpdateLoanFeeRequest $request, LoanFee $loanFee)
     {
-        //
+        $validated = $request->validated();
+
+        $loanFee->update($validated);
+
+        return back();
     }
 
     /**

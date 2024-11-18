@@ -89,7 +89,7 @@ export default function Authenticated({ children }: { children: ReactNode }) {
                             </Button>
                         </div>
                     </header>
-                    <main className="max-w-full">
+                    <main className="max-w-full mb-6">
                         {children}
                     </main>
                 </div>

@@ -86,7 +86,9 @@ class FlotiController extends Controller
      */
     public function update(UpdateFlotiRequest $request, Floti $floti)
     {
-        //
+        $validated = $request->validated();
+
+        
     }
 
     /**

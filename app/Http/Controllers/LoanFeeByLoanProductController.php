@@ -29,7 +29,11 @@ class LoanFeeByLoanProductController extends Controller
      */
     public function store(StoreLoanFeeByLoanProductRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        LoanFeeByLoanProduct::create($validated);
+
+        return back();
     }
 
     /**

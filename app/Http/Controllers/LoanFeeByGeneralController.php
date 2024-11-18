@@ -29,7 +29,11 @@ class LoanFeeByGeneralController extends Controller
      */
     public function store(StoreLoanFeeByGeneralRequest $request)
     {
-        //
+        $validated = $request->validated(); 
+
+        LoanFeeByGeneral::create($validated);
+
+        return back();
     }
 
     /**

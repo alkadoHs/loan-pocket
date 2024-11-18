@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLoanProductRequest;
 use App\Http\Requests\UpdateLoanProductRequest;
 use App\Models\LoanProduct;
+use Inertia\Inertia;
 
 class LoanProductController extends Controller
 {
@@ -13,7 +14,9 @@ class LoanProductController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('loan-products/Index', [
+            'loanProducts' => LoanProduct::get(),
+        ]);
     }
 
     /**
@@ -29,7 +32,11 @@ class LoanProductController extends Controller
      */
     public function store(StoreLoanProductRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        LoanProduct::create($validated);
+
+        return redirect()->back();
     }
 
     /**
@@ -45,7 +52,10 @@ class LoanProductController extends Controller
      */
     public function edit(LoanProduct $loanProduct)
     {
-        //
+        return Inertia::render('loan-products/Edit', [
+            'loanProduct' => $loanProduct,
+            'loanFees' => $loanProduct->loanFeesByLoanProduct()->get(),
+        ]);
     }
 
     /**
@@ -53,7 +63,11 @@ class LoanProductController extends Controller
      */
     public function update(UpdateLoanProductRequest $request, LoanProduct $loanProduct)
     {
-        //
+        $validated = $request->validated();
+
+        $loanProduct->update($validated);
+
+        return redirect()->back();
     }
 
     /**

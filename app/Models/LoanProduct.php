@@ -26,7 +26,7 @@ class LoanProduct extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function loanFees(): HasMany
+    public function loanFeesByLoanProduct(): HasMany
     {
         return $this->hasMany(LoanFeeByLoanProduct::class);
     }

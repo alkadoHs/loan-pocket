@@ -20,9 +20,9 @@ class Company extends Model
         return $this->hasMany(LoanProduct::class);
     }
 
-    public function loanFees(): HasMany
+    public function loanFee(): HasOne
     {
-        return $this->hasMany(LoanFee::class);
+        return $this->hasOne(LoanFee::class);
     }
 
     public function shareholders(): HasMany
